@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
+      - ConnectionStrings__DefaultConnection=Data Source=/data/tasks.db
+    volumes:
+      - api-data:/data
+    networks:
+      - internal_network
+
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    depends_on:
+      - api
+    ports:
+      - "80:80"
+    networks:
+      - internal_network
+
+volumes:
+  api-data:  # Persistent storage for SQLite database
+
+networks:
+  internal_network:
+    driver: bridge
