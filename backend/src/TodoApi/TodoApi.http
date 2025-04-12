@@ -1,0 +1,36 @@
+@TodoApi_HostAddress = http://localhost:5179
+
+### Get all tasks
+GET {{TodoApi_HostAddress}}/
+Accept: application/json
+
+GET {{TodoApi_HostAddress}}/api/tasks
+Accept: application/json
+
+### Get a single task by ID
+GET {{TodoApi_HostAddress}}/api/tasks/1
+Accept: application/json
+
+### Create a new task
+POST {{TodoApi_HostAddress}}/api/tasks
+Content-Type: application/json
+
+{
+  "title": "Study for exam",
+  "description": "Study Chapters 5 to 7",
+  "completed": false
+}
+
+### Update a task
+PUT {{TodoApi_HostAddress}}/api/tasks/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "title": "Study for exam - updated",
+  "description": "Study everything from Chapter 1 to 7",
+  "completed": true
+}
+
+### Delete a task
+DELETE {{TodoApi_HostAddress}}/api/tasks/1
